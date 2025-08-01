@@ -1,0 +1,35 @@
+# Episode-01 | Inception
+
+## What is Emmet?
+- Emmet is a shorthand syntax that helps speed up HTML and CSS writing.
+- For example, typing ul>li\*5 auto-generates 5 list items inside a ul.
+- It is commonly supported in code editors like VS Code.
+
+## Difference between a Library and Framework?
+- A library (like React) offers tools/functions we call when needed.
+- A framework (like Angular) provides structure and calls our code.
+- With a framework, we follow its rules; with a library, we control the flow.
+
+## What is CDN? Why do we use it?
+- CDN (Content Delivery Network) is a network of servers accross the world that delivers static assets (like JS,CSS) from the nearest location to the users.
+- It improves performance and reduces server load.
+
+## Why is React known as React?
+- React is named so because it "reacts" to state changes, when data changes, the UI automatically updates in response.
+
+## What is crossorigin in the script tag
+- crossorigin is used when loading third-party scripts (e.g., from CDN) and when you use integrity attribute.
+- It tells the browser how to handle CORS.
+- For subresource integrity to work, it's usually set to "anonymous".
+
+## Difference between React and ReactDOM?
+- React contains the core react features (like components,state, etc.).
+- ReadDOM deals with rendering React components to the DOM in web apps.
+
+## Difference between react.development.js and react.production.js from CDN?
+- development.js: Includes warnings, dev tools, and is not optimized.
+- production.js: Minified, no warnings, optimized for performance and deployment.
+
+## What is async and defer in script loading?
+- async: Loads scripts in parallel and executes it as soon as it's downloaded, which may interrupt HTML parsing.
+- defer: Loads in parallel but waits untill HTML is fully parsed, then executes in order.
