@@ -1,4 +1,6 @@
-# Episode-01 | Inception
+# 
+ 
+
 
 ## What is Emmet?
 - Emmet is a shorthand syntax that helps speed up HTML and CSS writing.
@@ -16,6 +18,7 @@
 
 ## Why is React known as React?
 - React is named so because it "reacts" to state changes, when data changes, the UI automatically updates in response.
+- React is called "React" because it is designed to react to changes in data and automatically update the user interface (UI) in response.
 
 ## What is crossorigin in the script tag
 - crossorigin is used when loading third-party scripts (e.g., from CDN) and when you use integrity attribute.
