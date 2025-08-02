@@ -1,27 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", {}, "Hot module replacement"),
-    React.createElement("h2", {}, "i'm an h2 tag"),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "I'm h1 tag"),
-    React.createElement("h2", {}, "I'm h2 tag"),
-  ]),
-]);
-
-const heading = React.createElement(
-  "h1",
-  { id: "heading", style: { fontSize: "30px", fontStyle: "italic" } },
-  "Hello-World from React!"
+// React Component
+const Heading = ({ name }) => (
+  <div>
+    <h1 id="heading"> {name} </h1>
+    {subheading}
+  </div>
 );
 
-console.log(parent); // This is a React element, which is just a plain JavaScript object representing the UI.
+// Component composition -- combining two components
+const Title = () => {
+  return (
+    <div>
+      <h1>AZAZEL</h1>
+      <Heading name="Bino Bense" />
+    </div>
+  );
+};
+
+function NormalFn() {
+  return <h1>{(onerror = alert("XSS"))}</h1>;
+}
+
+// React Element
+const parentTitle = (
+  <div>
+    <h1>Hey This the parent continer using react element</h1>
+    <Title />
+    {NormalFn()}
+  </div>
+);
+
+const subheading = <h1>this is subheading using React element</h1>;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(parent);
-// This root.render method takes the React element (a JS object) and convert it into actual DOM nodes that the browser can understand and renders it inside the element with id 'root'.
 
-// To solve nested tag we have jsx.
+root.render(parentTitle);
