@@ -43,11 +43,18 @@
   cursor: pointer;
 }
 
-.search {
+.filter {
+  margin: 10px 20px;
+}
+
+.filter-btn {
   padding: 10px;
-  border: 1px solid red;
-  width: 200px;
-  margin: 20px;
+  border: none;
+  background-color: rgb(215, 52, 115);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .restro-container {
