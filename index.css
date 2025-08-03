@@ -1,3 +1,73 @@
-#heading {
-    color: red;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 10px 20px;
+}
+
+.logo-container {
+  width: 120px;
+  margin-left: 50px;
+}
+
+.logo {
+  width: 100%;
+}
+
+.nav-items > ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav-items > ul > li {
+  padding: 10px 30px;
+  margin: 5px;
+  color: white;
+  font-size: 15px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: rgb(46, 134, 156);
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-items > ul > li:hover {
+  /* filter: brightness(110%); */
+  opacity: 0.9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.search {
+  padding: 10px;
+  border: 1px solid red;
+  width: 200px;
+  margin: 20px;
+}
+
+.restro-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.restro-card {
+  width: 220px;
+  /* height: 310px; */
+  margin: 5px 20px;
+  padding: 5px;
+}
+
+.restro-card:hover {
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.restro-logo {
+  width: 100%;
+  height: 200px;
 }
