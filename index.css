@@ -121,3 +121,10 @@
   border: 1px solid red;
   background-color: rgb(181, 173, 173);
 }
+
+.description {
+  background-color: rgb(165, 165, 207);
+  width: max-content;
+  padding: 10px;
+  margin: 5px;
+}

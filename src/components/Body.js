@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   let [myRestaurantList, setMyRestaurantList] = useState([]);
@@ -29,8 +30,6 @@ const Body = () => {
         ?.restaurants
     );
   };
-
-  console.log("rendered");
 
   // Conditional Rendering
   if (myRestaurantList.length === 0) {
@@ -77,7 +76,12 @@ const Body = () => {
       </div>
       <div className="restro-container">
         {myFilteredList.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} {...restaurant.info} />
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurant/" + restaurant.info.id}
+          >
+            <RestaurantCard {...restaurant.info} />
+          </Link>
         ))}
       </div>
     </div>
