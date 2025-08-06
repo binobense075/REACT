@@ -1,41 +1,29 @@
-import { useEffect, useState } from "react";
-import { MENU_LINK } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  console.log(resId);
-  const [resInfo, setResInfo] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const resInfo = useRestaurantMenu(resId);
 
-  const fetchData = async () => {
-    const data = await fetch(MENU_LINK + resId);
+  if (!resInfo) return <Shimmer />;
 
-    const json = await data.json();
+  const cardInfo = resInfo?.cards.find((cd) => cd.card.card.info);
 
-    console.log(json);
+  const { name, avgRatingString, costForTwoMessage, city } =
+    cardInfo.card.card.info;
 
-    setResInfo(json.data);
-  };
-
-  if (resInfo === null) {
-    return <Shimmer />;
-  }
-
-  const { text } = resInfo?.cards?.[0]?.card?.card;
-  const { city, avgRatingString, costForTwoMessage } =
-    resInfo?.cards?.[2]?.card?.card?.info;
-  const { itemCards } =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards[2].card.card;
+  const { groupedCard } = resInfo.cards.find((cd) => cd.groupedCard);
+  const resMenuCards = groupedCard?.cardGroupMap?.REGULAR.cards.find(
+    (cd) => cd.card.card.itemCards
+  );
+  const { itemCards } = resMenuCards.card.card;
 
   return (
     <div>
       <div className="heading-container">
-        <h3>{text}</h3>
+        <h3>{name}</h3>
       </div>
       <div className="description">
         <p>{avgRatingString + " stars"} </p>
@@ -54,3 +42,8 @@ const RestaurantMenu = () => {
 };
 
 export default RestaurantMenu;
+
+// const { card: {card: {info} ={}} = {}} = resInfo?.cards.find(
+//   (cd) => cd.card.card.info
+// );
+// console.log("info", info); //! Nested destructing info alternate of below cardInfo.card.card.info
