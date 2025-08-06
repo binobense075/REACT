@@ -32,8 +32,6 @@ const RestaurantMenu = () => {
   const { itemCards } =
     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards[2].card.card;
 
-  console.log(itemCards);
-
   return (
     <div>
       <div className="heading-container">

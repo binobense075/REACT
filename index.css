@@ -128,3 +128,14 @@
   padding: 10px;
   margin: 5px;
 }
+
+.user-card {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.count-btn {
+  padding: 5px;
+  cursor: pointer;
+}
