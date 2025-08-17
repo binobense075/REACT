@@ -1,42 +1,51 @@
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
 
   const resInfo = useRestaurantMenu(resId);
 
+  const [showIndex, setShowIndex] = useState(0);
+
   if (!resInfo) return <Shimmer />;
 
   const cardInfo = resInfo?.cards.find((cd) => cd.card.card.info);
 
-  const { name, avgRatingString, costForTwoMessage, city } =
-    cardInfo.card.card.info;
+  const { name, avgRatingString, city } = cardInfo.card.card.info;
 
   const { groupedCard } = resInfo.cards.find((cd) => cd.groupedCard);
-  const resMenuCards = groupedCard?.cardGroupMap?.REGULAR.cards.find(
-    (cd) => cd.card.card.itemCards
+  const categoryCards = groupedCard?.cardGroupMap?.REGULAR.cards.filter(
+    (cd) =>
+      cd.card.card["@type"] ===
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   );
-  const { itemCards } = resMenuCards.card.card;
+
+  console.log("categoryCards", categoryCards);
 
   return (
-    <div>
-      <div className="heading-container">
-        <h3>{name}</h3>
+    <div className="w-7/12 mx-auto mt-3">
+      <div className="text-center my-1.5">
+        <h1 className="font-bold text-2xl">{name}</h1>
+        <div className="my-2">
+          <span>{avgRatingString + " ⭐"}&nbsp;&nbsp;</span>
+          <span className="font-bold">Outlet&nbsp;&nbsp;-&nbsp;&nbsp;</span>
+          <span className="text-gray-600">{city}</span>
+        </div>
       </div>
-      <div className="description">
-        <p>{avgRatingString + " stars"} </p>
-        <p>{costForTwoMessage}</p>
-        <p>{"Outlet " + city}</p>
-      </div>
-      <div className="menu-card">
-        <ul>
-          {itemCards.map((item) => (
-            <li key={item.card.info.id}>{item.card.info.name}</li>
-          ))}
-        </ul>
-      </div>
+      {categoryCards.map((cd, index) => (
+        <RestaurantCategory
+          key={cd.card.card.title}
+          items={cd.card.card}
+          showItems={index === showIndex && true}
+          setShowIndex={() =>
+            setShowIndex((prev) => (prev === index ? null : index))
+          }
+        />
+      ))}
     </div>
   );
 };

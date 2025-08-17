@@ -1,8 +1,9 @@
-import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import RestaurantCard, { withPromotedlabel } from "./RestaurantCard";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   let [myRestaurantList, setMyRestaurantList] = useState([]);
@@ -10,9 +11,15 @@ const Body = () => {
 
   let [searchtext, setSearchtext] = useState("");
 
+  const RestaurantPromotedCard = withPromotedlabel(RestaurantCard);
+
   useEffect(() => {
     fetchData();
   }, []);
+
+  const { loggedInUser, setName } = useContext(UserContext);
+
+  // useEffect(() => {}, []);
 
   const fetchData = async () => {
     const data = await fetch(
@@ -83,6 +90,15 @@ const Body = () => {
             Top rated Restaurant
           </button>
         </div>
+        <div>
+          <input
+            className="border border-black ml-4 py-1 px-2 font-bold"
+            value={loggedInUser}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          ></input>
+        </div>
       </div>
       <div className="flex flex-wrap">
         {myFilteredList.map((restaurant) => (
@@ -90,7 +106,12 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurant/" + restaurant.info.id}
           >
-            <RestaurantCard {...restaurant.info} />
+            {Object.keys(restaurant.info?.aggregatedDiscountInfoV3 ?? {})
+              .length === 0 ? (
+              <RestaurantCard {...restaurant.info} />
+            ) : (
+              <RestaurantPromotedCard {...restaurant.info} />
+            )}
           </Link>
         ))}
       </div>
